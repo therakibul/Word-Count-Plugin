@@ -13,6 +13,12 @@
  * Text Domain:       word-count
  * Domain Path:       /languages
 */
-    
-
+    function wc_word_count($content){
+        $label = apply_filters("wc_label", "Total Number Of Words");
+        $wordn = str_word_count(strip_tags($content));
+        $tag = apply_filters("wc_tag", "h1");
+        $content = sprintf("<%s>%s: %s</%s>", $tag, $label, $wordn, $tag);;
+        return $content;
+    }
+    add_filter("the_content", "wc_word_count");
  ?>
